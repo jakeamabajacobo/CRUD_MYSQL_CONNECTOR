@@ -131,12 +131,14 @@ Partial Class Form1
         'dg_view_item
         '
         Me.dg_view_item.AllowUserToAddRows = False
+        Me.dg_view_item.AllowUserToDeleteRows = False
         Me.dg_view_item.AllowUserToResizeRows = False
         Me.dg_view_item.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dg_view_item.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dg_view_item.Location = New System.Drawing.Point(63, 59)
         Me.dg_view_item.MultiSelect = False
         Me.dg_view_item.Name = "dg_view_item"
+        Me.dg_view_item.ReadOnly = True
         Me.dg_view_item.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dg_view_item.Size = New System.Drawing.Size(696, 281)
         Me.dg_view_item.TabIndex = 13
