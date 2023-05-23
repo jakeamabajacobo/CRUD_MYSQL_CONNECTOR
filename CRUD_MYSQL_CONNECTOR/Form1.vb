@@ -42,6 +42,28 @@ Public Class Form1
 
     End Function
 
+
+    Private Function DbRequest(ByVal string_query As String, ByVal sql_con As MySqlConnection)
+
+        Try
+            sql_con.ConnectionString = "server=127.0.0.1;user id=root;password=;database=item_db"
+
+            If mysql_con.State = ConnectionState.Closed Then
+                sql_con.Open()
+            End If
+            mysql_comm.Connection = sql_con
+            mysql_comm.CommandText = string_query
+            mysql_adapter.SelectCommand = mysql_comm
+            mysql_comm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            mysql_con.Close()
+        End Try
+
+    End Function
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dg_view_item.DataSource = PopulateTable("SELECT * FROM tblitems", mysql_con)
     End Sub
@@ -79,27 +101,7 @@ Public Class Form1
         dg_view_item.Refresh()
     End Function
 
-    Private Function DbRequest(ByVal string_query As String, ByVal sql_con As MySqlConnection)
 
-        Try
-            sql_con.ConnectionString = "server=127.0.0.1;user id=root;password=;database=item_db"
-
-            If mysql_con.State = ConnectionState.Closed Then
-                sql_con.Open()
-            End If
-            mysql_comm.Connection = sql_con
-            mysql_comm.CommandText = string_query
-            mysql_adapter.SelectCommand = mysql_comm
-            mysql_comm.ExecuteNonQuery()
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            mysql_con.Close()
-            mysql_adapter.Dispose()
-        End Try
-
-    End Function
 
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
         DbRequest("UPDATE tblitems SET ITEMNAME='" & txt_itemname.Text & "',ITEMDESCRIPTION='" & txt_itemdescription.Text & "',QTY='" & txt_qty.Text & "',PRICE='" & txt_price.Text & "'  where ID='" & Me.Text & "'", mysql_con)
